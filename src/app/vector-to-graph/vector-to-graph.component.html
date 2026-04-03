@@ -1,0 +1,151 @@
+<div class="container">
+  <h1>Logical Vector to Graph</h1>
+
+  <div class="input-group">
+    <div class="input-row">
+      <label for="inputVector">Logical Vector:</label>
+      <input style="width: 500px;" [(ngModel)]="inputVector"
+        placeholder="Enter logical vector (e.g., 0001, 0110, 0111, 1001, ...)" id="inputVector"
+        (input)="onVectorChange()" (keydown.enter)="onConvert()" />
+      <label style="margin-left: 12px;" [class.show]="isSquareVector" class="bipartite">
+        <input type="checkbox" [(ngModel)]="forceBipartite" /> Bipartite layout
+      </label>
+
+    </div>
+
+    <div class="input-row" *ngIf="showSizeInputs">
+      <label for="rows">Rows:</label>
+      <input type="number" [(ngModel)]="rows" id="rows" min="1" max="32" />
+
+      <label for="cols">Columns:</label>
+      <input type="number" [(ngModel)]="cols" id="cols" min="1" max="32" />
+    </div>
+
+    <div class="input-row">
+      <!-- <ng-container *ngIf="showResult && hasIsolatedVertices">
+        <label><input type="checkbox" [(ngModel)]="hideIsolated" (change)="computeVisibleNodes()" /> Hide isolated vertices</label>
+      </ng-container> -->
+      <button (click)="onConvert()">Convert</button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div *ngIf="showResult && !error" class="result-container" [class.vertical-layout]="useVerticalLayout">
+
+    <svg [attr.width]="svgSize" [attr.height]="svgSize">
+
+
+      <!-- Nodes (только круги) -->
+      <g *ngFor="let idx of visibleNodeIndices; let _i = index">
+        <ng-container *ngIf="nodes[idx] as node">
+          <circle [attr.cx]="nodeCoords[idx].x" [attr.cy]="nodeCoords[idx].y" [attr.r]="nodeRadius[idx]"
+            [attr.fill]="bipartiteLayout ? (isNodeLeft(idx) ? '#E3F2FD' : '#E8F5E8') : nodeColors[idx % nodeColors.length]"
+            [attr.stroke]="bipartiteLayout ? (isNodeLeft(idx) ? '#2196F3' : '#4CAF50') : '#1976d2'" stroke-width="3" />
+          <!-- Белый круг под текст -->
+          <circle [attr.cx]="nodeCoords[idx].x" [attr.cy]="nodeCoords[idx].y" [attr.r]="nodeInnerRadius[idx]"
+            fill="#fff" />
+        </ng-container>
+      </g>
+
+      <!-- Edges (arrows) -->
+      <ng-container *ngFor="let e of edges">
+        <ng-container *ngIf="e.from !== e.to; else loopTpl">
+          <line
+            [attr.x1]="getEdgePoint(nodeCoords[e.from].x, nodeCoords[e.from].y, nodeCoords[e.to].x, nodeCoords[e.to].y, nodeRadius[e.from]).x"
+            [attr.y1]="getEdgePoint(nodeCoords[e.from].x, nodeCoords[e.from].y, nodeCoords[e.to].x, nodeCoords[e.to].y, nodeRadius[e.from]).y"
+            [attr.x2]="getEdgePoint(nodeCoords[e.to].x, nodeCoords[e.to].y, nodeCoords[e.from].x, nodeCoords[e.from].y, nodeRadius[e.to]).x"
+            [attr.y2]="getEdgePoint(nodeCoords[e.to].x, nodeCoords[e.to].y, nodeCoords[e.from].x, nodeCoords[e.from].y, nodeRadius[e.to]).y"
+            marker-end="url(#arrow)" [attr.stroke]="bipartiteLayout ? '#666' : '#1976d2'" stroke-width="2.5" />
+        </ng-container>
+        <ng-template #loopTpl>
+          <path *ngIf="!bipartiteLayout && hasReflexiveRelations"
+            [attr.d]="getExpressiveLoopPath(nodeCoords[e.from].x, nodeCoords[e.from].y, e.from, nodes.length, 28, nodeRadius[e.from])"
+            stroke="#1976d2" stroke-width="3" fill="none" marker-end="url(#arrowSmall)" />
+        </ng-template>
+      </ng-container>
+
+      <!-- Текст поверх -->
+      <g *ngFor="let idx of visibleNodeIndices">
+        <text [attr.x]="nodeCoords[idx].x" [attr.y]="nodeCoords[idx].y + 6" text-anchor="middle" font-size="14"
+          [attr.fill]="bipartiteLayout ? (isNodeLeft(idx) ? '#2196F3' : '#4CAF50') : '#1976d2'"
+          style="pointer-events: none; font-weight: bold;">{{ nodes[idx] }}</text>
+      </g>
+
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#666" />
+        </marker>
+        <marker id="arrowSmall" markerWidth="4" markerHeight="4" refX="4" refY="2" orient="auto"
+          markerUnits="strokeWidth">
+          <path d="M0,0 L4,2 L0,4 Z" fill="#1976d2" />
+        </marker>
+      </defs>
+    </svg>
+
+    <!-- Right side info -->
+    <div class="right-panel">
+
+      <!-- Graph Creation Time -->
+      <div
+        style="text-align: center; margin-bottom: 6px; padding: 4px; background-color: #e3f2fd; border-radius: 2px; font-size: 12px;">
+        Graph Creation Time:
+        <span style="color: #1976d2;">
+          {{ graphCreationTime === 0 ? '< 0.001' : (Math.floor(graphCreationTime * 10000) / 10000) }} ms </span>
+      </div>
+
+      <!-- Matrix Representation -->
+      <div class="truth-table">
+        <div style="margin-bottom: 4px; text-align: center; font-size: 12px;">Matrix Representation ({{rows}}×{{cols}})
+        </div>
+        <table>
+          <tr>
+            <th>Row\Col</th>
+            <th *ngFor="let col of [].constructor(cols); let j = index">{{ getBinaryIndexCol(j) }}</th>
+          </tr>
+          <tr *ngFor="let row of [].constructor(rows); let i = index">
+            <td style="font-size: 12px;">{{ getBinaryIndexRow(i) }}</td>
+            <td *ngFor="let col of [].constructor(cols); let j = index">
+              {{ inputVector[i * cols + j] === '1' ? '1' : '' }}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Reflexive Relations Info -->
+      <!-- <div class="reflexive-info">
+        <div class="info-label">Reflexive Relations:</div>
+        <div class="info-item">
+          <strong>{{ hasReflexiveRelations ? 'Yes' : 'No' }}</strong>
+          <small *ngIf="hasReflexiveRelations">(All vertices have self-loops)</small>
+          <small *ngIf="!hasReflexiveRelations">(2×2 matrices have no self-loops)</small>
+        </div>
+      </div> -->
+
+      <!-- Graph Info -->
+      <!-- <div class="graph-info">
+        <div class="info-label">Graph Structure:</div>
+        <div class="info-item">
+          <strong>{{nodes.length}} vertices</strong>
+          <small>{{rows}}×{{cols}} regular</small>
+        </div>
+      </div> -->
+
+      <!-- Bipartite Info -->
+      <div *ngIf="isBipartite" class="bipartite-info">
+        <div class="partition-label">Partitions:</div>
+        <div class="partition-item">
+          <span class="partition-color left-partition"></span>
+          L: {{ leftPartition.join(', ') }}
+        </div>
+        <div class="partition-item">
+          <span class="partition-color right-partition"></span>
+          V: {{ rightPartition.join(', ') }}
+        </div>
+        <div class="bipartite-note">
+          <small>Note: Self-loops are hidden for bipartite graphs</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

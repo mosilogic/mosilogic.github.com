@@ -1,0 +1,255 @@
+/* ============================================================
+   GLOBAL DESIGN TOKENS — light defaults, overridden by .dark
+   ============================================================ */
+:root {
+  --bg-page: #f4f6fa;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f0f4f8;
+  --bg-accent: #e6f0fa;
+  --border: #d0d8e4;
+  --text-primary: #1a1e2e;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --accent-blue: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: #dbeafe;
+  --cell-bg: #e6f0fa;
+  --thead-bg: #dde8f5;
+  --nav-bg: #ffffff;
+  --nav-border: #e2e8f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
+  --radius: 8px;
+  --svg-bg: #f9fafb;
+  --input-bg: #ffffff;
+  --badge-green-bg: #dcfce7;
+  --badge-green: #16a34a;
+  --badge-orange-bg: #fff7ed;
+  --badge-orange: #ea580c;
+  --info-bg: #f0fdf4;
+  --info-border: #86efac;
+  --warn-bg: #fff7ed;
+  --warn-border: #fdba74;
+  --error: #ef4444;
+  --success: #22c55e;
+  --partition-left: #3b82f6;
+  --partition-right: #22c55e;
+  --transition-speed: 0.3s;
+}
+
+/* Dark theme overrides applied to <html class="dark"> */
+html.dark {
+  --bg-page: #0f1117;
+  --bg-surface: #1a1d27;
+  --bg-surface-2: #222536;
+  --bg-accent: #1e2540;
+  --border: #2d3350;
+  --text-primary: #e8ecf4;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --accent-blue: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-light: #1e3a6e;
+  --cell-bg: #1e2540;
+  --thead-bg: #252c45;
+  --nav-bg: #141720;
+  --nav-border: #2d3350;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --svg-bg: #1a1d27;
+  --input-bg: #1a1d27;
+  --badge-green-bg: #052e16;
+  --badge-green: #4ade80;
+  --badge-orange-bg: #431407;
+  --badge-orange: #fb923c;
+  --info-bg: #052e16;
+  --info-border: #166534;
+  --warn-bg: #431407;
+  --warn-border: #7c2d12;
+  --error: #f87171;
+  --success: #4ade80;
+  --partition-left: #60a5fa;
+  --partition-right: #4ade80;
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SHARED COMPONENT STYLES (used across multiple components)
+   ============================================================ */
+.container {
+  min-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: inherit;
+  padding: 24px;
+  margin: 8px;
+  background: var(--bg-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+h2 {
+  color: var(--text-primary);
+}
+
+h3 {
+  color: var(--text-secondary);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  color: var(--text-secondary);
+}
+
+input,
+select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  transition: border-color 0.2s, background 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+}
+
+select {
+  padding: 6px;
+  font-size: 15px;
+  text-align: center;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  transition: background-color 0.2s, transform 0.1s;
+  font-family: inherit;
+
+  &:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+button[type="button"] {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+
+  &:hover {
+    background: var(--bg-surface-2);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.vector-output {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 15px;
+  color: var(--text-primary);
+}
+
+/* Tables */
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 15px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th {
+  border: 1px solid var(--border);
+  padding: 6px 4px;
+  background: var(--thead-bg);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+td {
+  padding: 5px 4px;
+  border: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+}
+
+p {
+  word-break: break-word;
+  color: var(--text-secondary);
+}
+
+.resultCell {
+  background: var(--cell-bg) !important;
+  color: var(--text-primary);
+}
+
+/* Gate config rows */
+.gate-config {
+  background: var(--bg-surface-2);
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin: 4px 0;
+  border: 1px solid var(--border);
+}

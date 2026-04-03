@@ -1,0 +1,179 @@
+/* Schneider component — all colors via CSS custom properties */
+
+.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.gate-config {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 6px 0;
+  transition: background 0.3s, border-color 0.3s;
+
+  label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin: 0;
+    display: inline;
+  }
+
+  input {
+    margin: 0;
+    padding: 4px 8px;
+    width: 90px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 13px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+  }
+
+  button {
+    padding: 4px 10px;
+    font-size: 12px;
+    margin: 0;
+    height: auto;
+    background: #ef4444;
+    border-radius: 4px;
+
+    &:hover {
+      background: #dc2626;
+    }
+  }
+}
+
+input {
+  margin: 6px;
+  padding: 6px 8px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: background 0.3s, border-color 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  }
+}
+
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  transition: background 0.2s, transform 0.1s;
+
+  &:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+}
+
+.circuit {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--svg-bg);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+svg {
+  background: var(--svg-bg);
+  transition: background 0.3s;
+}
+
+text {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  fill: var(--text-primary);
+}
+
+rect {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+line {
+  stroke-width: 2;
+}
+
+label {
+  display: inline;
+  color: var(--text-secondary);
+}
+
+select {
+  margin: 5px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  padding: 5px 8px;
+  font-size: 14px;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* Truth table inside schneider */
+table {
+  border-collapse: collapse;
+  background: var(--bg-surface);
+  transition: background 0.3s;
+}
+
+th {
+  background: var(--thead-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  padding: 5px 6px;
+}
+
+td {
+  background: var(--bg-surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  padding: 4px 6px;
+  text-align: center;
+}
+
+/* Cell with accent */
+td[style*="#e3f2fd"],
+td[style*="#e0f7fa"] {
+  background: var(--cell-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Side image panel */
+.side-image {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  transition: background 0.3s, border-color 0.3s;
+
+  h3 {
+    color: var(--text-primary);
+  }
+
+  img {
+    border: 1px solid var(--border) !important;
+    border-radius: 10px;
+  }
+}

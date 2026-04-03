@@ -1,0 +1,86 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 48px;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+
+  nav {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  nav button {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+    &:hover {
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      transform: none;
+    }
+
+    &.active {
+      background: var(--accent-light);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      font-weight: 600;
+    }
+  }
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 0;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--bg-accent);
+    border-color: var(--accent-blue);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  span {
+    line-height: 1;
+  }
+}
+
+.app-main {
+  min-height: calc(100vh - 48px);
+  padding: 16px;
+  background: var(--bg-page);
+  transition: background var(--transition-speed) ease;
+}

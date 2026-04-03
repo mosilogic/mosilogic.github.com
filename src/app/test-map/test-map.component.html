@@ -1,0 +1,100 @@
+<div class="test-map-container">
+  <h2>Vector Logic Test Map Generator</h2>
+
+  <div class="input-section">
+    <label for="vectorInput">Enter Logic Vector (binary string):</label>
+    <div class="input-group">
+      <input id="vectorInput" type="text" [(ngModel)]="vectorInput" placeholder="e.g. 11100111"
+        (keyup.enter)="calculateTestMap()" />
+      <button (click)="calculateTestMap()">Calculate Test Map</button>
+    </div>
+  </div>
+
+  <div class="result-section" *ngIf="testMap.length > 0">
+    <div class="matrices-grid">
+      <!-- L Matrix -->
+      <div class="matrix-card">
+        <div class="matrix-title">L-matrix</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let b of vBits">{{ b }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of lMatrix; let i = index">
+                <th class="head-row">{{ vBits[i] }}</th>
+                <td *ngFor="let cell of row">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- H Matrix -->
+      <div class="matrix-card">
+        <div class="matrix-title">H-matrix</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let h of decAxes">{{ h }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of hMatrix; let i = index">
+                <th class="head-row">{{ i }}</th>
+                <td *ngFor="let cell of row">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- D Matrix -->
+      <div class="matrix-card">
+        <div class="matrix-title">D-matrix</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let f of faultAxes">{{ f }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of dMatrix; let i = index">
+                <th class="head-row">{{ testSets[i] }}</th>
+                <td *ngFor="let cell of row">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- C Matrix -->
+      <div class="matrix-card">
+        <div class="matrix-title">C-matrix or testing map</div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th *ngFor="let f of faultAxes">{{ f }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of testMap; let i = index">
+                <th class="head-row">{{ testSets[i] }}</th>
+                <td *ngFor="let cell of row">{{ cell }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

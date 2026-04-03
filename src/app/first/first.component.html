@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>GenLV 01</h1>
+  <form (ngSubmit)="generateResult()" #form="ngForm">
+    <label>Vector 1: <input required name="inputVector1" [(ngModel)]="inputVector1" /></label>
+    <label>Vector 2: <input required name="inputVector2" [(ngModel)]="inputVector2" /></label>
+    <label>Signature Vector:
+      <input required name="signatureVector" [(ngModel)]="signatureVector" /></label>
+    <label>
+      Merged Inputs (comma-separated indices):
+      <input name="mergedInputs" [(ngModel)]="mergedInputs" placeholder="Enter indices e.g. 2,3" />
+    </label>
+    <button type="submit">Generate</button>
+  </form>
+  <h2>Result</h2>
+  <p>{{ resultString }}</p>
+  <table *ngIf="resultString">
+    <tr>
+      <th>L</th>
+      <th><ng-container *ngFor="let col of rowHeaders[0].split(''); let i = index">{{colHeaders[0].length + i +
+          1}}</ng-container>
+      </th>
+      <th *ngFor="let row of rowHeaders">{{ row }}</th>
+    </tr>
+    <tr>
+      <th><ng-container *ngFor="let col of colHeaders[0].split(''); let i = index">{{i + 1}}</ng-container></th>
+      <th>{{ signatureVector }}</th>
+      <th *ngFor="let col of inputVector2.split('')">{{ col }}</th>
+    </tr>
+    <tr *ngFor="let row of resultMatrix; let i = index">
+      <td style="font-weight: 600;">{{ colHeaders[i] }}</td>
+      <td style="font-weight: 600;">{{ inputVector1[i] }}</td>
+      <td class="resultCell" *ngFor="let cell of row">{{ cell }}</td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>GenLV 02</h1>
+  <form [formGroup]="form" (ngSubmit)="generateResult()">
+    <ng-container formArrayName="inputVectors">
+      <div *ngFor="let vector of inputVectors.controls; let i = index" [formGroupName]="i">
+        <label>Vector {{i + 1}}:
+          <input required formControlName="vector" /></label>
+        <label *ngIf="inputVectors.controls.length > 2 && i < inputVectors.controls.length - 2"> Combination operator
+          <select formControlName="operation">
+            <option *ngFor="let operator of combinationOperators" [value]="operator.value">{{operator.name}}</option>
+          </select></label>
+      </div>
+
+    </ng-container>
+    <button type="button" (click)="addVector()">Add Vector</button>
+    <label>Signature Vector:
+      <input required name="signatureVector" formControlName="signatureVector" /></label>
+    <label>
+      Merged Inputs (comma-separated indices):
+      <input formControlName="mergedInputs" placeholder="Enter indices e.g. 2,3" />
+    </label>
+    <button [disabled]="form.invalid" type="submit">Generate</button>
+  </form>
+  <h2>Result</h2>
+  <p>{{ resultString }}</p>
+  <table *ngIf="resultString">
+    <tr>
+      <th>L</th>
+      <th><ng-container *ngFor="let col of rowHeaders[0].split(''); let i = index">{{colHeaders[0].length + i +
+          1}}</ng-container>
+      </th>
+      <th *ngFor="let row of rowHeaders">{{ row }}</th>
+    </tr>
+    <tr>
+      <th><ng-container *ngFor="let col of colHeaders[0].split(''); let i = index">{{i + 1}}</ng-container></th>
+      <th>{{ signatureVector }}</th>
+      <th *ngFor="let col of colsVector">{{ col }}</th>
+    </tr>
+    <tr *ngFor="let row of resultMatrix; let i = index">
+      <td>{{ colHeaders[i] }}</td>
+      <td>{{ rowsVector[i] }}</td>
+      <td class="resultCell" *ngFor="let cell of row">{{ cell === 1 ? cell : null }}</td>
+    </tr>
+  </table>
+</div>
