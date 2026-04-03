@@ -65,5 +65,5 @@ Chandra, E. Garita-Rodriguez, and P. Ghosh, "Test, Debug, and Repair for Chiplet
 "IEEE Draft Standard for Static Component Interconnection Test Protocol and Architecture," in IEEE P1581/D2.22, vol., no., pp.1-122, 11 Sept. 2025.
 S. Das, F. Su and S. Chakravarty, "Testing of Prebond Through Silicon Vias," in IEEE Design & Test, vol. 37, no. 4, pp. 27-34, Aug. 2020, doi: 10.1109/MDAT.2020.2968255.
 https://vector-simulation-model.vercel.app/. Accessed 09.02.2026.
-https://andreyv99.github.io/GenLV/vector-to-graph. Accessed 09.02.2026.
+https://andreyv99.github.io/Mosilogic/vector-to-graph. Accessed 09.02.2026.
 BIOGRAPHIES OF AUTHORS

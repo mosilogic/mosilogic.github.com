@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'GenLV';
+  title = 'Mosilogic';
   isDark = false;
 
   constructor(private renderer: Renderer2) {}
