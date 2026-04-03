@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-critters-container>
+
+<head>
+    <meta charset="utf-8">
+    <title>GenLV</title>
+    <base href="https://github.com/mosilogic/mosilogic.github.com.git">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+<style>@charset "UTF-8";:root{--bg-page:#f4f6fa;--bg-surface:#ffffff;--bg-surface-2:#f0f4f8;--bg-accent:#e6f0fa;--border:#d0d8e4;--text-primary:#1a1e2e;--text-secondary:#4a5568;--text-muted:#718096;--accent-blue:#2563eb;--accent-hover:#1d4ed8;--accent-light:#dbeafe;--cell-bg:#e6f0fa;--thead-bg:#dde8f5;--nav-bg:#ffffff;--nav-border:#e2e8f0;--shadow-sm:0 1px 3px rgba(0, 0, 0, .08);--shadow-md:0 4px 12px rgba(0, 0, 0, .1);--radius:8px;--svg-bg:#f9fafb;--input-bg:#ffffff;--badge-green-bg:#dcfce7;--badge-green:#16a34a;--badge-orange-bg:#fff7ed;--badge-orange:#ea580c;--info-bg:#f0fdf4;--info-border:#86efac;--warn-bg:#fff7ed;--warn-border:#fdba74;--error:#ef4444;--success:#22c55e;--partition-left:#3b82f6;--partition-right:#22c55e;--transition-speed:.3s}*,*:before,*:after{box-sizing:border-box}html{font-size:16px}body{margin:0;background-color:var(--bg-page);color:var(--text-primary);font-family:Inter,Segoe UI,system-ui,sans-serif;transition:background-color var(--transition-speed) ease,color var(--transition-speed) ease;min-height:100vh}</style><link rel="stylesheet" href="styles.8ef9d659db1ce63a.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.8ef9d659db1ce63a.css"></noscript></head>
+
+<body>
+    <app-root></app-root>
+<script src="runtime.dac21b35533c1d69.js" type="module"></script><script src="polyfills.313752f72524f86b.js" type="module"></script><script src="main.2bdbd1e61649e4d2.js" type="module"></script></body>
+
+</html>
