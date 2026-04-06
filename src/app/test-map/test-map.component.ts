@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-mosi-logic',
+  selector: 'app-test-map',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './test-map.component.html',

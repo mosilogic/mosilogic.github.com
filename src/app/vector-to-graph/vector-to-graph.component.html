@@ -56,12 +56,13 @@
             [attr.y1]="getEdgePoint(nodeCoords[e.from].x, nodeCoords[e.from].y, nodeCoords[e.to].x, nodeCoords[e.to].y, nodeRadius[e.from]).y"
             [attr.x2]="getEdgePoint(nodeCoords[e.to].x, nodeCoords[e.to].y, nodeCoords[e.from].x, nodeCoords[e.from].y, nodeRadius[e.to]).x"
             [attr.y2]="getEdgePoint(nodeCoords[e.to].x, nodeCoords[e.to].y, nodeCoords[e.from].x, nodeCoords[e.from].y, nodeRadius[e.to]).y"
-            marker-end="url(#arrow)" [attr.stroke]="bipartiteLayout ? '#666' : '#1976d2'" stroke-width="2.5" />
+            marker-end="url(#arrow)"
+            [attr.stroke]="bipartiteLayout ? 'var(--graph-edge-bipartite)' : 'var(--graph-edge)'" stroke-width="2.5" />
         </ng-container>
         <ng-template #loopTpl>
           <path *ngIf="!bipartiteLayout && hasReflexiveRelations"
             [attr.d]="getExpressiveLoopPath(nodeCoords[e.from].x, nodeCoords[e.from].y, e.from, nodes.length, 28, nodeRadius[e.from])"
-            stroke="#1976d2" stroke-width="3" fill="none" marker-end="url(#arrowSmall)" />
+            stroke="var(--graph-edge)" stroke-width="3" fill="none" marker-end="url(#arrowSmall)" />
         </ng-template>
       </ng-container>
 

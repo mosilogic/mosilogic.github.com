@@ -35,6 +35,10 @@
   --partition-left: #3b82f6;
   --partition-right: #22c55e;
   --transition-speed: 0.3s;
+
+  --graph-edge: #1976d2;
+  --graph-edge-bipartite: #666666;
+  --graph-arrow: #666666;
 }
 
 /* Dark theme overrides applied to <html class="dark"> */
@@ -70,6 +74,9 @@ html.dark {
   --success: #4ade80;
   --partition-left: #60a5fa;
   --partition-right: #4ade80;
+  --graph-edge-bipartite: #3b82f6;
+  /* Blue for bipartite lines in dark mode */
+
 }
 
 /* ============================================================

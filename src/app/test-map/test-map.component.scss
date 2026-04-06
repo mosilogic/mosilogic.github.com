@@ -158,19 +158,19 @@
         td {
           min-width: 14px;
           height: 14px;
-          background-color: var(--cell-bg);
+          background-color: transparent;
         }
 
         thead th {
-          background-color: var(--thead-bg);
-          font-weight: 700;
-          border-bottom: 2px solid var(--accent-blue);
+          background-color: transparent;
+          font-weight: normal;
+          border-bottom: 2px solid var(--text-primary);
         }
 
         .head-row {
-          background-color: var(--thead-bg);
-          font-weight: 700;
-          border-right: 2px solid var(--accent-blue);
+          background-color: transparent;
+          font-weight: normal;
+          border-right: 2px solid var(--text-primary);
         }
       }
     }
